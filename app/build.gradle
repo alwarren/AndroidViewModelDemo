@@ -1,0 +1,58 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "demo.kotlin.vm"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+ext.versions = [
+        support        : '27.1.0',
+        constraint     : '1.0.2',
+        arch           : '1.1.0',
+        dagger         : '2.14.1',
+        junit          : '4.12',
+        runner         : '1.0.1',
+        espresso       : '3.0.1',
+        timber         : '4.6.1'
+]
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // kotlin
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    // android
+    implementation "com.android.support:appcompat-v7:$versions.support"
+    implementation "com.android.support.constraint:constraint-layout:$versions.constraint"
+    implementation "com.android.support:design:$versions.support"
+    // arch
+    implementation "android.arch.lifecycle:runtime:$versions.arch"
+    implementation "android.arch.lifecycle:extensions:$versions.arch"
+    implementation "android.arch.lifecycle:common-java8:$versions.arch"
+    // dagger
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    implementation "com.google.dagger:dagger-android-support:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+    // timber
+     implementation "com.jakewharton.timber:timber:$versions.timber"
+    // testing
+    testImplementation "junit:junit:$versions.junit"
+    androidTestImplementation "com.android.support.test:runner:$versions.runner"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$versions.espresso"
+}
